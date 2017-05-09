@@ -1,0 +1,319 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>新增作品</title>
+    <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="stylesheet" type="text/css" href="~/Scripts/Shared/bootstrap/css/bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="~/Content/Shared/theme.css">
+    <link rel="stylesheet" href="~/Scripts/Shared/font-awesome/css/font-awesome.css">
+    <script src="~/Scripts/Shared/jquery-1.7.2.min.js" type="text/javascript"></script>
+    <script src="~/Scripts/ckeditor/ckeditor.js"></script>
+
+    <!-- Demo page code -->
+
+    <style type="text/css">
+        #line-chart {
+            height: 300px;
+            width: 800px;
+            margin: 0px auto;
+            margin-top: 1em;
+        }
+
+        .brand {
+            font-family: georgia, serif;
+        }
+
+            .brand .first {
+                color: #ccc;
+                font-style: italic;
+            }
+
+            .brand .second {
+                color: #fff;
+                font-weight: bold;
+            }
+    </style>
+
+    <!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <!-- Le fav and touch icons -->
+    <link rel="shortcut icon" href="../assets/ico/favicon.ico">
+    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="../assets/ico/apple-touch-icon-144-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="../assets/ico/apple-touch-icon-114-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="../assets/ico/apple-touch-icon-72-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" href="../assets/ico/apple-touch-icon-57-precomposed.png">
+</head>
+
+<!--[if lt IE 7 ]> <body class="ie ie6"> <![endif]-->
+<!--[if IE 7 ]> <body class="ie ie7 "> <![endif]-->
+<!--[if IE 8 ]> <body class="ie ie8 "> <![endif]-->
+<!--[if IE 9 ]> <body class="ie ie9 "> <![endif]-->
+<!--[if (gt IE 9)|!(IE)]><!-->
+<body class="">
+    <!--<![endif]-->
+    <div class="content" style="margin-left:0px;min-height:500px">
+        <div class="container-fluid">
+            <div class="row-fluid">
+                <div class="well">
+                    <div id="myTabContent" class="tab-content">
+                        <div class="tab-pane active in" id="home"> 
+                                @{ 
+                                    MrHai.BMS.Models.Work.WorkViewModel entity = ViewBag.model;
+                                }
+                                <label>作品名称</label>
+                                <input type="text" class="input-xlarge" id="txtName" placeholder="名称" maxlength="100" value="@entity.name">
+                                <label>作品摘要</label>
+                                <input type="text" class="input-xlarge" id="txtSummary" placeholder="摘要" maxlength="500" value="@entity.summary">
+                                <label>作品归类</label>
+                                <select name="ddCa" id="ddCa"  class="input-xlarge">
+                                    <option value="-1">请选择</option>
+                                    @{ List<MrHai.Application.Models.CategoryListDto> workList = ViewBag.ca;
+                                        foreach (var item in workList)
+                                        {
+                                            if (item.Id.Equals(entity.ca))
+                                            {
+                                                <option value="@item.Id" selected>@item.Name</option>
+                                                continue;
+                                            }
+                                            <option value="@item.Id">@item.Name</option>
+                                        }
+                                    }
+                                </select>
+                                <label>作品背景</label>
+                                <div id="backgrand">
+                                    <form method="post" id="uploadBackGrand" enctype="multipart/form-data">
+                                        <input type="file" name="file" class=""  onchange="ajaxFileImage()" />
+                                    </form>                                    
+                                    <img src="@entity.backgrand" id="imguploadBackGrand" class="img-polaroid" style="width:500px;height:300px">
+                                </div>
+                                
+                                <label>作品视频</label>
+                                <div>
+                                    <form method="post" enctype="multipart/form-data" id="uploadVideo">
+                                        <input type="file"  name="file" class=""  id="filVideo" />
+                                    </form>
+                                    <video controls height="240" width="240" id="video" src="@entity.video"></video>
+
+                                </div>
+                           
+                       
+                                <label>视频截图</label>
+                                <div id="screenShot" style="min-height:200px">
+                                    <form method="post" enctype="multipart/form-data" id="uploadScreenShot">
+                                        <input type="file" class="" name="file" multiple onchange="ajaxFileImageMore('uploadScreenShot')" />
+                                    </form>
+                                    @{ 
+                                        foreach (var item in entity.screenShotArray)
+                                        {
+                                            <img  src="@item" style="width:120px;height:120px" class="img-polaroid" name="imgScreenShot"/>
+                                        }
+                                    }
+                                </div>                               
+                                <label>组装过程</label>
+                                <div id="assembly" style="min-height:200px">
+                                    <form method="post" enctype="multipart/form-data" id="uploadAssembly">
+                                        <input type="file" class="" name="file" multiple onchange="ajaxFileImageMore('uploadAssembly')"/>
+                                    </form>
+                                    @{
+                                        foreach (var item in entity.assemblyArray)
+                                        {
+                                            <img src="@item" style="width:120px;height:120px" class="img-polaroid" name="imgAssembly" />
+                                        }
+                                    }
+                                </div>
+                               
+                                <label>关于作品</label>
+                                <div>
+                                    <textarea name="editor1" id="editor1" rows="10" cols="80">@entity.about</textarea>
+                                    <script type="text/javascript">
+                                        CKEDITOR.replace('editor1');
+                                    </script>
+                                </div>
+                        </div>
+
+                    </div>
+                    <div class="btn-toolbar">
+                        <button class="btn btn-primary" id="save"><i class="icon-save"></i>保存</button>
+                    </div>
+                   
+                </div>
+      <input  type="hidden" id="infoID" value="@entity.infoID" />
+            </div>
+        </div>
+    </div>
+    <script src="~/Scripts/Shared/bootstrap/js/bootstrap.js"></script>
+    <script type="text/javascript" src="~/Scripts/jquery.form.js"></script>
+    <script src="~/Scripts/layer/layer.js"></script>
+    <script type="text/javascript">
+        //上传背景视频
+         $("#filVideo").change(function () {
+            var index = layer.load(1, {
+                shade: [0.1, '#fff'] //0.1透明度的白色背景
+            });
+            $("#uploadVideo").ajaxSubmit({
+                type: "post",
+                dataType: "json",
+                url: "@Url.Action("UpVideo", "Video")",
+                success: function (data) {
+                    layer.close(index);
+                    console.log(data);
+                    if (data.result.errcode == 0) {
+                        $("#video").attr("src", data.result.msg);
+                    }
+                    else {
+                        layer.msg(data.result.msg);
+                    }
+                }
+            })
+        })
+
+        //上传背景图片
+        function ajaxFileImage() {
+            var index = layer.load(1, {
+                shade: [0.1, '#fff'] //0.1透明度的白色背景
+            });
+            $("#uploadBackGrand").ajaxSubmit({
+                type: "post",
+                dataType: "json",
+                url: "@Url.Action("UpLoad","Image")",
+                success: function (data) {
+                    layer.close(index);
+                    console.log(data);
+                    if (data.result.errcode == 0) {
+                        $("#imguploadBackGrand").attr("src", data.result.msg);
+                    }
+                    else {
+                        layer.msg(data.result.msg);
+                    }
+                }
+            })
+        }
+
+        function ajaxFileImageMore(formName) {
+            var index = layer.load(1, {
+                shade: [0.1, '#fff'] //0.1透明度的白色背景
+            });
+            $("#" + formName).ajaxSubmit({
+                type: "post",
+                dataType: "json",
+                url: "@Url.Action("UpLoadImages", "Image")",
+                success: function (data) {
+                    layer.close(index);
+                    console.log(data);
+                    if (data.result.errcode == 0) {
+                        for (var i = 0; i < data.body.length; i++) {
+                            ChangeSrc(formName,data.body[i]);
+                        }
+                        
+                    }
+                    else {
+                        layer.msg(data.result.msg);
+                    }
+                }
+            })
+        }
+
+
+        function ChangeSrc(item,src) {
+            switch (item) {
+                case "uploadScreenShot": ChangeScreenShot(src); break;//视频截图
+                case "uploadAssembly": ChangeAssembly(src); break;//组装过程
+            }
+        }
+
+        function ChangeScreenShot(src) {
+            var imge = ImageNodeCreate(src);
+            imge.attr("name", "imgScreenShot");
+            $("#screenShot").append(imge);
+        }
+        function ChangeAssembly(src) {
+            var imge = ImageNodeCreate(src);
+            imge.attr("name", "imgAssembly");
+            $("#assembly").append(imge);
+        }
+        function ImageNodeCreate(src) {
+            var imge = $("<img/>");
+            imge.addClass("img-polaroid");
+            imge.attr("width", "120")
+            imge.attr("height", "120")
+            imge.attr("src", src);
+            return imge
+        }
+       
+        $("#save").click(function () {
+            var postData = new Object();
+            postData.infoID = $("#infoID").val();
+            postData.ca = $("#ddCa option:selected").val();//分类ID
+            postData.name = $("#txtName").val();
+            postData.backgrand = $("#imguploadBackGrand").attr("src");
+            postData.video = $("#video").attr("src");
+            postData.summary = $("#txtSummary").val();
+            postData.screenShot = "";
+            postData.assembly = "";
+            $("img[name='imgScreenShot']").each(function (i) {
+                if (this.src != "") {
+                    postData.screenShot += this.src + "|";
+                }
+            });
+            $("img[name='imgAssembly']").each(function (i) {
+                if (this.src != "") {
+                    postData.assembly += this.src + "|";
+                }
+            });
+            postData.about = CKEDITOR.instances.editor1.getData();
+
+            if(postData.ca=="-1") {
+                layer.msg("请选择作品分类");
+                return;
+            }
+            if (postData.name=="") {
+                layer.msg("请输入作品名称");
+                return;
+            }
+            if (postData.summary=="") {
+                layer.msg("请输入摘要");
+                return;
+            }
+            if (postData.backgrand == "") {
+                layer.msg("请上传背景图片");
+                return;
+            }
+            if (postData.about == "") {
+                layer.msg("请填写关于作品");
+                return;
+            }
+            $.post("@Url.Action("Add")", JSON.stringify(postData),
+                function (data) {
+                    console.log(data);
+                    layer.msg(data.result.msg);
+            }, "json");
+        })
+
+        $("#screenShot").on("dblclick", "img", function () {
+            if (!confirm("确定删除")) {
+                return;
+            }
+            $(this).remove();
+        });
+
+        $("#assembly").on("dblclick", "img", function () {
+            if (!confirm("确定删除")) {
+                return;
+            }
+            $(this).remove();
+        });
+
+    </script>
+</body>
+</html>

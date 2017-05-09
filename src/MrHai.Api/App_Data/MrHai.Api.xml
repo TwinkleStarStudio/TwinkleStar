@@ -1,0 +1,171 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>MrHai.Api</name>
+    </assembly>
+    <members>
+        <member name="T:MrHai.Api.SwaggerConfig">
+            <summary>
+            Swagger 配置
+            </summary>
+        </member>
+        <member name="M:MrHai.Api.SwaggerConfig.Register">
+            <summary>
+            注册swagger
+            </summary>
+        </member>
+        <member name="T:MrHai.Api.Controllers.CategoryController">
+            <summary>
+            菜单
+            </summary>
+        </member>
+        <member name="P:MrHai.Api.Controllers.CategoryController.MrHaiApplication">
+            <summary>
+            注入
+            </summary>
+        </member>
+        <member name="M:MrHai.Api.Controllers.CategoryController.GetParent">
+            <summary>
+            获取菜单列表
+            </summary> 
+        </member>
+        <member name="M:MrHai.Api.Controllers.CategoryController.GetContact">
+            <summary>
+            获取contact 
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:MrHai.Api.Controllers.CategoryController.GetChild(System.String)">
+            <summary>
+            获取作品导航菜单
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:MrHai.Api.Controllers.CategoryDto">
+            <summary>
+            菜单Dto
+            </summary>
+        </member>
+        <member name="P:MrHai.Api.Controllers.CategoryDto.Id">
+            <summary>
+            Id
+            </summary>
+        </member>
+        <member name="P:MrHai.Api.Controllers.CategoryDto.Type">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:MrHai.Api.Controllers.CategoryDto.Name">
+            <summary>
+            菜单显示的名字
+            </summary>
+        </member>
+        <member name="P:MrHai.Api.Controllers.CategoryDto.Url">
+            <summary>
+            url
+            </summary>
+        </member>
+        <member name="P:MrHai.Api.Controllers.CategoryDto.Content">
+            <summary>
+            内容
+            </summary>
+        </member>
+        <member name="P:MrHai.Api.Controllers.CategoryDto.Child">
+            <summary>
+            子节点
+            </summary>
+        </member>
+        <member name="T:MrHai.Api.Controllers.CategoryDtoType">
+            <summary>
+            类型
+            </summary>
+        </member>
+        <member name="F:MrHai.Api.Controllers.CategoryDtoType.None">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:MrHai.Api.Controllers.CategoryDtoType.Show">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:MrHai.Api.Controllers.CategoryDtoType.Url">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:MrHai.Api.Controllers.CategoryDtoType.Request">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:MrHai.Api.Controllers.GlobalConfigController">
+            <summary>
+            碎片模块
+            </summary>
+        </member>
+        <member name="P:MrHai.Api.Controllers.GlobalConfigController.MrHaiApplication">
+            <summary>
+            注入
+            </summary>
+        </member>
+        <member name="M:MrHai.Api.Controllers.GlobalConfigController.Get">
+            <summary>
+            获取碎片列表
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:MrHai.Api.Controllers.InformationController">
+            <summary>
+            资讯
+            </summary>
+        </member>
+        <member name="P:MrHai.Api.Controllers.InformationController.MrHaiApplication">
+            <summary>
+            注入
+            </summary>
+        </member>
+        <member name="M:MrHai.Api.Controllers.InformationController.GetInfo(System.String)">
+            <summary>
+            获取资讯
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:MrHai.Api.Controllers.InformationController.GetBg(System.String)">
+            <summary>
+            
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="T:MrHai.Api.Controllers.TestController">
+            <summary>
+            测试
+            </summary>
+        </member>
+        <member name="P:MrHai.Api.Controllers.TestController.MrHaiApplication">
+            <summary>
+            注入
+            </summary>
+        </member>
+        <member name="M:MrHai.Api.Controllers.TestController.TestApplocation">
+            <summary>
+            测试
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:MrHai.Api.WebApiApplication">
+            <summary>
+            应用程序
+            </summary>
+        </member>
+        <member name="M:MrHai.Api.WebApiApplication.Application_Start">
+            <summary>
+            应用程序起始点
+            </summary>
+        </member>
+    </members>
+</doc>

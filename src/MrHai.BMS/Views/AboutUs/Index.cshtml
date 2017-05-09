@@ -1,0 +1,70 @@
+﻿@using MrHai.Common.GlobalConfig
+@{
+    ViewBag.Title = "关于我们";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="header">
+    <h1 class="page-title">关于我们</h1>
+</div>
+
+<div class="container-fluid">
+    <div class="row-fluid">
+
+        <div class="btn-toolbar">
+            <button class="btn btn-primary" id="btnAdd"><i class="icon-plus"></i>添加</button>
+            <button class="btn" onclick="save()">保存结果</button>
+            <div class="btn-group">
+            </div>
+        </div>
+        <div class="well">
+            <form action="@Url.Action("Save")" method="post" id="formTable">
+                <table class="table" id="tabAboutUs">
+                    <thead>
+                        <tr>
+                            <th>邮箱</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @{ AboutUs list = ViewBag.list;
+                            <tr hidden="hidden"><td><input type="hidden" value="@list.ID" name="ID" /></td></tr>
+                            
+                            if (list != null && list.AboutUsSetting != null && list.AboutUsSetting.Count > 0)
+                            {
+                                foreach (var item in list.AboutUsSetting)
+                                {
+                                    <tr>
+                                        <td><input type="text" class="input-xlarge" value="@item.Email" name="EMail" /></td>
+                                        <td><button class="btn" onclick="deleteRow($(this))">删除</button></td>
+                                    </tr>
+                                }
+                            }
+                        }
+                    </tbody>
+                </table>
+            </form>
+        </div>
+        <footer>
+            <hr>
+        </footer>
+    </div>
+</div>
+
+<script type="text/javascript">
+    $(function () {
+        $("#btnAdd").click(function () {
+            var newRow = '<tr><td><input type="text" class="input-xlarge" value="" name="EMail"/></td>';
+            newRow += '<td><button class="btn" onclick="deleteRow($(this))">删除</button></td></tr>';
+            $('#tabAboutUs').append(newRow);
+        });
+    });
+
+    function deleteRow(btn) {
+        btn.parent().parent().remove();
+    }
+
+    function save() {
+        formTable.submit();
+    }
+
+</script>

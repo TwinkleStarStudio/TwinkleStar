@@ -1,0 +1,51 @@
+﻿@using MrHai.Common.GlobalConfig
+@{
+    ViewBag.Title = "官网";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="header">
+    <h1 class="page-title">官网</h1>
+</div>
+
+<div class="container-fluid">
+    <div class="row-fluid">
+
+        <div class="btn-toolbar">
+            <button class="btn" onclick="save()">保存结果</button>
+            <div class="btn-group">
+            </div>
+        </div>
+        <div class="well">
+            <form action="@Url.Action("Save")" method="post" id="formTable">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>官网名称</th>
+                            <th>链接地址(请输入完整地址，必须包含http://或https://)</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @{ OfficialWebsite website = ViewBag.webSite;
+                                <tr>
+                                    <td><input type="hidden" name="ID" value="@website.ID" /><input type="text" id="txtName" class="input-xlarge" value="@website.OfficialWebsiteSetting.Name" name="Name" /></td>
+                                    <td><input type="text" id="txtUrl" class="input-xlarge" value="@website.OfficialWebsiteSetting.URL" name="Url" /> </td>
+                                </tr>
+                        }
+                    </tbody>
+                </table>
+            </form>
+        </div>
+        <footer>
+            <hr>
+        </footer>
+    </div>
+</div>
+
+<script type="text/javascript">
+    function save() {
+        formTable.submit();
+    }
+
+</script>
+

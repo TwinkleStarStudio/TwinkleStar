@@ -1,0 +1,84 @@
+﻿
+@{
+    ViewBag.Title = "Logo管理";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="header">
+    <h1 class="page-title">Logo管理</h1>
+</div>
+<div class="container-fluid">
+    <div class="row-fluid">
+        <div class="row-fluid">
+            <div class="block span6">
+                <p class="block-heading">Logo管理</p>
+                <div class="block-body gallery">
+                    <form method="post" enctype="multipart/form-data" id="uploadLogo">
+                        <input type="file"  name="file" id="fileLogo"/>
+                    </form>
+                    <img src="@ViewBag.logo" class="img-polaroid" style="width:240px;height:240px" id="logo">
+
+                    <div class="clearfix"></div>
+                </div>
+            </div>
+            <div class="block span6">
+                <p class="block-heading">背景视频</p>
+                <div class="block-body gallery">
+                    <form method="post" enctype="multipart/form-data" id="uploadVideo">
+                        <input type="file" name="file" id="fileBrandgroun"/>
+                    </form>
+                    <video controls height="240" width="240" id="video" src="@ViewBag.video"></video>
+
+                    <div class="clearfix"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript" src="~/Scripts/jquery.form.js"></script>
+<script type="text/javascript">
+    //上传背景视频
+    $("#fileBrandgroun").change(function () {
+        var index = layer.load(1, {
+            shade: [0.1, '#fff'] //0.1透明度的白色背景
+        });
+        $("#uploadVideo").ajaxSubmit({
+            type: "post",
+            dataType: "json",
+            url: "@Url.Action("UpLoadBackGroundVideo", "Video")",
+                success: function (data) {
+                    layer.close(index);
+                    console.log(data);
+                    if (data.result.errcode == 0) {
+                        $("#video").attr("src", data.result.msg);
+                    }
+                    else {
+                        layer.msg(data.result.msg);
+                    }
+                }
+            })
+        })
+
+    $("#fileLogo").change(function () {
+
+        var index = layer.load(1, {
+            shade: [0.1, '#fff'] //0.1透明度的白色背景
+        });
+
+        $("#uploadLogo").ajaxSubmit({
+                type: "post",
+                dataType: "json",
+                url: "@Url.Action("UpLoadLogo", "Image")",
+                success: function (data) {
+                    layer.close(index);
+                    console.log(data);
+                    if (data.result.errcode == 0) {
+                        $("#logo").attr("src", data.result.msg);
+                    }
+                    else {
+                        layer.msg(data.result.msg);
+                    }
+                }
+            })
+    })
+
+</script>

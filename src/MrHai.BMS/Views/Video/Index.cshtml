@@ -1,0 +1,55 @@
+﻿
+@{
+    ViewBag.Title = "视频管理";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<script type="text/javascript" src="~/Scripts/jquery.form.js"></script>
+<div class="header">
+    <h1 class="page-title">背景视频</h1>
+</div>
+<div class="container-fluid">
+    <div class="row-fluid">
+        <div class="row-fluid">
+            <div class="block span6">
+                <p class="block-heading">当前背景视频</p>
+                <div class="block-body gallery">
+
+                    <video autoplay loop controls height="240" width="240" src="http://oac58wjv9.bkt.clouddn.com/IndexBackGroundVideo"></video>
+
+
+
+                    <div class="clearfix"></div>
+                </div>
+            </div>
+            <div class="block span6">
+                <p class="block-heading">视频上传</p>
+                <div class="block-body gallery">
+                    <form id="form1" method="post" enctype="multipart/form-data" >
+                        <input type="file" name="file" onchange="ajaxFileUpload()"/>
+                    </form>
+                    <div class="clearfix"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+    //上传图片
+    function ajaxFileUpload() {
+        $("#form1").ajaxSubmit({
+            type: "post",
+            dataType: "json",
+            url: "@Url.Action("UpVideo")",
+            success: function (data) {
+                layer.msg(data.result.msg);
+                if (data.result.errCode == 0) {
+                    window.location.reload();
+                }
+            }
+        })
+    }
+
+</script>
+
+

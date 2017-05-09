@@ -1,0 +1,116 @@
+﻿@using MrHai.Common.GlobalConfig
+@using MrHai.Application.Models;
+@{
+    ViewBag.Title = "最新作品";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="header">
+    <h1 class="page-title">最新作品</h1>
+</div>
+
+<div class="container-fluid">
+    <div class="row-fluid">
+
+        <div class="btn-toolbar">
+            <button class="btn btn-primary" id="btnAdd"><i class="icon-plus"></i>添加作品</button>
+            <button class="btn" onclick="save()">保存结果</button>    
+            <div class="btn-group">
+            </div>
+        </div>
+        <div class="well">
+            <form action="@Url.Action("Save")" method="post" id="formTable">
+                <table class="table" id="tabNewWorks">
+                    <thead>
+                        <tr>
+                            <th>作品名称</th>
+                            <th>排序</th>
+                            <th>操作</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @{ NewWorks newWorks = ViewBag.NewWorks;
+                            <tr hidden="hidden"><td><input type="hidden" value="@newWorks.ID" name="ID" /></td></tr>
+                            if (newWorks != null && newWorks.NewWorksList != null && newWorks.NewWorksList.Count > 0)
+                            {
+                                foreach (var item in newWorks.NewWorksList)
+                                {
+                                    <tr>
+                                        <td>
+                                            <select name="selWorksId">
+                                                <option value="-1">-</option>
+                                                @{
+                                                    List<CategoryListDto> Works = ViewBag.Works;
+                                                    foreach (var item1 in Works)
+                                                    {
+                                                        <option value="@item1.Id" @(item.WorksId == item1.Id ? "selected" : "")>@item1.Name</option>
+                                                    }
+                                                }
+                                            </select>
+                                        </td>
+                                        <td><input type="number" class="input-xlarge" value="@item.OrderNum" name="OrderNum" /></td>
+                                        <td><button class="btn" onclick="deleteRow($(this))">删除</button></td>
+                                    </tr>
+                                }
+                            }
+                        }
+                    </tbody>
+                </table>
+            </form>
+        </div>
+        <footer>
+            <hr>
+
+        </footer>
+    </div>
+</div>
+
+@{
+    List<CategoryListDto> works = ViewBag.Works;   
+}
+
+<script type="text/javascript">
+
+    var sel = $("<select/>");
+    sel.attr("name", "selWorksId");
+    var opt = $("<option/>");
+        opt.val("-1");
+        opt.html("-")
+        sel.append(opt);
+    @foreach (var item in works)
+    {
+        <Text>
+        var opt = $("<option/>");
+        opt.val("@item.Id");
+        opt.html("@item.Name")
+        sel.append(opt);
+        </text>
+    }
+    
+    $("#btnAdd").click(function () {
+        var newRow = $("<tr/>");
+        //第一列
+        var first = $("<td/>").html(sel);
+        //第二列
+        var second = $("<td/>");
+        var inputDom = $("<input/>").attr({ type: "number", class: "input-xlarge", value: "", name: "OrderNum" });
+        second.append(inputDom);
+        //第三列
+        var third = $("<td/>");
+        var btn = $("<button/>").attr({ class: "btn", onclick: "deleteRow($(this))" }).html("删除");
+        third.append(btn);
+        newRow.append(first);
+        newRow.append(second);
+        newRow.append(third);
+        $('#tabNewWorks tbody').append(newRow);
+    });
+
+
+        function deleteRow(btn) {
+            btn.parent().parent().remove();
+        }
+        function save() {
+            formTable.submit();
+        }
+
+</script>

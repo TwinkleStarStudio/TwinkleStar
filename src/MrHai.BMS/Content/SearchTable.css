@@ -1,0 +1,14 @@
+﻿ .searchtable{
+        width:100%;
+        font-size:12px;
+        margin-bottom:0px;
+    }
+    .searchtable th{
+        width:20%;
+    }
+    .searchtable td{
+        width:30%;
+    }
+    #pageer{
+        text-align:center
+    }

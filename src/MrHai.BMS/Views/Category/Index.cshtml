@@ -1,0 +1,339 @@
+﻿@{
+    ViewBag.Title = ViewBag.PageTitle = "菜单";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<link href="~/Scripts/XWDefault/font-awesome.css" rel="stylesheet" />
+<style type="text/css">
+    body, html {
+        height: 100%;
+    }
+
+    .content {
+        min-height: calc(100% - 50px) !important;
+    }
+
+    .pading_min {
+        padding-right: 25px !important;
+    }
+
+    .btn-customer-sm {
+        line-height: 0.8;
+        padding-bottom: 0;
+        padding-top: 0;
+    }
+
+    .btn-group-vertical {
+        vertical-align: middle;
+    }
+
+    #dataTable > tbody > tr > td {
+        vertical-align: top;
+        min-width: 230px;
+    }
+</style>
+<div>
+    <div class="col-xs-12">
+        <div class="box">
+            <div class="box-header">
+                <input type="hidden" id="first_val" />
+                <input type="hidden" id="second_val" />
+                <input type="hidden" id="third_val" />
+            </div>
+            <div class="box-body">
+                <div class="container">
+                    <table id="dataTable" cellspacing="10" cellpadding="10">
+                        <thead>
+                            <tr>
+                                <td>
+                                    <div>
+                                        @*<button type="button" class="btn btn-info pull-right" onclick="AddDataShow(1,false)">添加</button>*@
+                                    </div>
+                                </td>
+                                <td>
+                                    <div>
+                                        <button type="button" class="btn btn-info pull-right" onclick="AddDataShow(2, false)">添加</button>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div>
+                                        @*<button type="button" class="btn btn-info pull-right" onclick="AddDataShow(3, true)"> 添加</button>*@
+                                    </div>
+                                </td>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td> 
+                                    <div>
+                                        <table id="first_menu" class="table table-striped table-hover">
+                                            <tbody>
+                                                <tr>
+                                                    <th>名称</th>
+                                                    <th>操作</th>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+
+                                    </div>
+                                </td>
+                                <td>
+                                    
+                                    <div>
+                                        <table id="second_menu" class="table table-striped table-hover">
+                                            <tbody>
+                                                <tr>
+                                                    <th>名称</th>
+                                                    <th>操作</th>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+
+                                    </div>
+                                </td>
+                                <td>
+                                    <div>
+                                        <table id="third_menu" class="table table-striped table-hover">
+                                            <tbody>
+                                                <tr>
+                                                    <th>名称</th>
+                                                    <th>操作</th>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script>
+    $(document).ready(function () {
+        BindTable("first_menu", "first_val", { type: 0 }, 2, false);
+    });
+    function SetForceAndBindSecond(tr, inputId) {
+        $(tr).parent().find("tr.info").toggleClass("info");//取消原先选中行
+        $(tr).toggleClass("info");//设定当前行为选中行
+        var trVal = $(tr).find(":input").val();
+        $("#" + inputId).val(trVal);
+
+        BindTable("second_menu", "second_val", { type: 0, pid: trVal }, 3, false);
+        var tableData = "";
+        tableData += "<tr><th>名称</th><th>操作</th></tr>";
+        $("#third_menu tbody").html(tableData);
+
+    }
+    function SetForceAndBindThird(tr, inputId) {
+        $(tr).parent().find("tr.info").toggleClass("info");//取消原先选中行
+        $(tr).toggleClass("info");//设定当前行为选中行
+        var trVal = $(tr).find(":input").val();
+        $("#" + inputId).val(trVal);
+        BindTable("third_menu", "third_val", { type: 0, pid: trVal }, 4, true);
+    }
+    function BindTable(tablename, valName, request_param, num, isThirth) {
+        $.ajax({
+            type: "post",
+            data: request_param,
+            url: '/Category/GetCategory',
+            success: function (data) {
+                if (data.ResultType == 0) {
+                    var tableData = "";
+                    tableData += "<tr><th>名称</th><th>操作</th></tr>";
+                    $.each(data.AppendData, function (i, item) {
+                        tableData += "<tr>";
+                        tableData += "<td>";
+                        tableData += '<input type="hidden" value="' + item.Id + '" />' + item.Name;
+                        tableData += "</td>";
+                        tableData += "<td>";
+                        tableData += '<div class="btn-group">'
+                        tableData += '<button type="button" class="btn btn-default" onclick="EditDataShow(' + item.Id + ',\'' + item.Name + '\')" title="修改"><i class="fa fa-edit"></i></button>';
+                        if (num > 2) {
+                            tableData += '<button type="button" class="btn btn-default" title="删除" onclick="DeleteDataShow(\'' + item.Id + '\')"><i class="fa fa-trash-o"></i></button>';
+                        }
+                        if (isThirth) {
+                            tableData += '<button type="button" class="btn btn-default" onclick="javascript:location.href=\'/Category/ArtIndex?pid='+item.Id+'\'" title="配置内容菜单"><i class="fa fa-cog"></i></button>';
+                        }
+
+                        tableData += '<div class="btn-group-vertical">';
+                        tableData += '<button type="button" class="btn btn-default btn-customer-sm" onclick="sort(\'' + item.Id + '\',1)"><i class="fa fa-sort-up"></i></button>';
+                        tableData += '<button type="button" class="btn btn-default btn-customer-sm" onclick="sort(\'' + item.Id + '\',-1)"><i class="fa fa-sort-down"></i></button>';
+                        tableData += '</div>';
+                        tableData += '</div>';
+                        tableData += "</td>";
+                        tableData += "</tr>";
+                    });
+                    $("#" + tablename + " tbody").html(tableData);
+                    $("#" + tablename + " tr").bind("click", function () {
+                        if (num == 2) {
+                            SetForceAndBindSecond(this, valName);
+                        }
+                        if (num == 3) {
+                            SetForceAndBindThird(this, valName);
+                        }
+                    }
+                    );
+                }
+            }
+        });
+    }
+
+    function AddDataShow(type, isthird) {
+        layer.open({
+            content: '<div >名称<input id="addName" type="text"/> </div>',
+            closeBtn: 1,
+            yes: function (layero, index) {
+                AddData(type, isthird);
+                layer.close(layero);
+            }
+        });
+    };
+    function AddData(type, isthird) {
+        var addName = $("#addName").val();
+        var pid = "";
+        if (type == 2) {
+            var first_val = $("#first_val").val();
+            console.log(first_val);
+            if (first_val == null || first_val == "undefined") {
+                alert("请选择一级菜单！");
+                return;
+            }
+            pid = first_val;
+        }
+        if (type == 3) {
+            var second_val = $("#second_val").val();
+            if (second_val == null || second_val == "undefined") {
+                alert("请选择二级菜单！");
+                return;
+            }
+            pid = second_val;
+        }
+        var postData = {
+            pid: pid,
+            name: addName,
+            type: 0,
+            isThird: isthird
+        };
+        $.ajax({
+            type: "post",
+            data: postData,
+            url: '/Category/AddCategory',
+            success: function (data) {
+                console.log(data);
+                if (data.Status != 200) {
+                    alert(data.Msg);
+                } else {
+                    Refresh();
+                }
+            }
+        });
+    }
+
+
+    function EditDataShow(id, name) {
+        event.stopPropagation();
+        layer.open({
+            content: '<div >名称<input id="editName" type="text" value="' + name + '"/> </div>',
+            closeBtn: 1,
+            yes: function (layero, index) {
+                EditData(id);
+                layer.close(layero);
+            }
+        });
+    };
+
+    function EditData(id) {
+        var editName = $("#editName").val();
+        var postData = {
+            id: id,
+            name: editName
+        };
+        $.ajax({
+            type: "post",
+            data: postData,
+            url: '/Category/EditCategory',
+            success: function (data) {
+                console.log(data);
+                if (data.Status != 200) {
+                    alert(data.Msg);
+                } else {
+                    Refresh();
+                }
+            }
+        });
+    }
+    function Refresh() {
+        var fiVal = $("#first_val").val();
+        var seVal = $("#second_val").val();
+
+        BindTable("first_menu", "first_val", { type: 0 }, 2, false);
+        if (fiVal != "" && fiVal != 'undefind') {
+            BindTable("second_menu", "second_val", { type: 0, pid: fiVal }, 3, false);
+        }
+        if (seVal != "" && seVal != 'undefind') {
+            BindTable("third_menu", "third_val", { type: 0, pid: seVal }, 4, true);
+        }
+
+    }
+
+    function sort(id, num) {
+        event.stopPropagation();
+        var postData = {
+            id: id,
+            num: num
+        };
+        $.ajax({
+            type: "post",
+            data: postData,
+            url: '/Category/SortCategory',
+            success: function (data) {
+                console.log(data);
+                if (data.Status != 200) {
+                    alert(data.Msg);
+                } else {
+                    Refresh();
+                    //window.location.reload();
+                }
+            }
+        });
+
+    }
+
+    function DeleteDataShow(id) {
+        event.stopPropagation();
+        layer.open({
+            content: '确认删除？',
+            closeBtn: 1,
+            yes: function (layero, index) {
+                DeleteData(id);
+                layer.close(layero);
+            }
+        });
+    }
+    function DeleteData(id) {
+        event.stopPropagation();
+        var postData = {
+            id: id
+        };
+        $.ajax({
+            type: "post",
+            data: postData,
+            url: '/Category/DeleteCategory',
+            success: function (data) {
+                console.log(data);
+                if (data.Status != 200) {
+                    alert(data.Msg);
+                } else {
+                    Refresh();
+                    //window.location.reload();
+                }
+            }
+        });
+
+    }
+</script>

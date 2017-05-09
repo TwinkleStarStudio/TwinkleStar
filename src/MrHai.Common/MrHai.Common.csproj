@@ -1,0 +1,88 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{8932F1E7-FAD8-421A-AFAC-7E1AF1945159}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>MrHai.Common</RootNamespace>
+    <AssemblyName>MrHai.Common</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="GlobalConfig\AboutUs.cs" />
+    <Compile Include="GlobalConfig\AboutUsConfig.cs" />
+    <Compile Include="GlobalConfig\Fragment.cs" />
+    <Compile Include="GlobalConfig\FragmentConfig.cs" />
+    <Compile Include="GlobalConfig\Logo.cs" />
+    <Compile Include="GlobalConfig\LogoConfig.cs" />
+    <Compile Include="GlobalConfig\FriendlyLinks.cs" />
+    <Compile Include="GlobalConfig\FriendlyLinksConfig.cs" />
+    <Compile Include="GlobalConfig\GlobalConfigBase.cs" />
+    <Compile Include="GlobalConfig\NewWorks.cs" />
+    <Compile Include="GlobalConfig\NewWorksConfig.cs" />
+    <Compile Include="GlobalConfig\OfficialWebsite.cs" />
+    <Compile Include="GlobalConfig\OfficialWebsiteConfig.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\MrHai.Core.Data\MrHai.Core.Data.csproj">
+      <Project>{39c47801-8d49-48dd-b544-1b83ea6e3f44}</Project>
+      <Name>MrHai.Core.Data</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\MrHai.Core.Models\MrHai.Core.Models.csproj">
+      <Project>{64a11fa7-d984-4020-84b5-a63dbf572236}</Project>
+      <Name>MrHai.Core.Models</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\TwinkleStar.Common\TwinkleStar.Common.csproj">
+      <Project>{7c011bb6-593b-4fc1-b0c8-93d6561b2f1f}</Project>
+      <Name>TwinkleStar.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\TwinkleStar.Data\TwinkleStar.Data.csproj">
+      <Project>{4a388dca-8c66-4d17-9ed4-c2abb511f44f}</Project>
+      <Name>TwinkleStar.Data</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

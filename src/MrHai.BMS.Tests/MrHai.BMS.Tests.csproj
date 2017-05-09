@@ -1,0 +1,111 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{06393BC1-7D45-44B0-B2A7-D8F53072E104}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>MrHai.BMS.Tests</RootNamespace>
+    <AssemblyName>MrHai.BMS.Tests</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <ProjectTypeGuids>{3AC096D0-A1C2-E12C-1390-A8335801FDAB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <IsCodedUITest>False</IsCodedUITest>
+    <TestProjectType>UnitTest</TestProjectType>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Microsoft.VisualStudio.QualityTools.UnitTestFramework" />
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.Composition" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Web.Abstractions" />
+    <Reference Include="System.Web.Routing" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Xml.Linq" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="UnitTest1.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\MrHai.BMS\MrHai.BMS.csproj">
+      <Project>{A827BFBA-A3B7-49EE-98BE-EBE1B613CB95}</Project>
+      <Name>MrHai.BMS</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\MrHai.Common\MrHai.Common.csproj">
+      <Project>{8932F1E7-FAD8-421A-AFAC-7E1AF1945159}</Project>
+      <Name>MrHai.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\MrHai.Core.Data\MrHai.Core.Data.csproj">
+      <Project>{39C47801-8D49-48DD-B544-1B83EA6E3F44}</Project>
+      <Name>MrHai.Core.Data</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\MrHai.Core.Models\MrHai.Core.Models.csproj">
+      <Project>{64A11FA7-D984-4020-84B5-A63DBF572236}</Project>
+      <Name>MrHai.Core.Models</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\MrHai.Core\MrHai.Core.csproj">
+      <Project>{8837368D-BC41-4FE4-95EF-54E3151B30AE}</Project>
+      <Name>MrHai.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\TwinkleStar.Common\TwinkleStar.Common.csproj">
+      <Project>{7C011BB6-593B-4FC1-B0C8-93D6561B2F1F}</Project>
+      <Name>TwinkleStar.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\TwinkleStar.Data\TwinkleStar.Data.csproj">
+      <Project>{4a388dca-8c66-4d17-9ed4-c2abb511f44f}</Project>
+      <Name>TwinkleStar.Data</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\TwinkleStar.Service\TwinkleStar.Service.csproj">
+      <Project>{2201322C-0FC7-4B10-B676-7BF0A1037BE5}</Project>
+      <Name>TwinkleStar.Service</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <Import Project="$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets" Condition="Exists('$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets')" />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

@@ -1,0 +1,69 @@
+﻿@using MrHai.Common.GlobalConfig
+@using MrHai.Application.Models;
+@{
+    ViewBag.Title = "碎片管理";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="header">
+    <h1 class="page-title">碎片管理</h1>
+</div>
+<div class="container-fluid">
+    <div class="row-fluid">
+
+        <div class="btn-toolbar">
+            <button class="btn" onclick="save()">保存结果</button>
+            <div class="btn-group">
+            </div>
+        </div>
+        <div class="well">
+            <form action="@Url.Action("Save")" method="post" id="formTable">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>碎片编号</th>
+                            <th>作品名称</th>
+                            <th>是否可用</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @{  Fragment fragment = ViewBag.fragment;
+                            <tr hidden="hidden"><td><input type="hidden" value="@fragment.ID" name="ID"/></td></tr>
+                            foreach (var item in fragment.Fragments)
+                            {
+                                <tr>
+                                    <td><label>@item.SerialNumber</label></td>
+                                    <td><select name=@("selWorksId" + @item.SerialNumber)>
+                                            <option value="-1">-</option>
+                                            @{
+                                                List<CategoryListDto> works = ViewBag.Works;
+                                                foreach (var item1 in works)
+                                                {
+                                                    <option value="@item1.Id"  @(item.WorksId==item1.Id ? "selected" : "")>@item1.Name</option>
+                                                }
+                                            }
+                                        </select> 
+                                    </td>
+                                    <td><input type="checkbox" class="input-xlarge" checked="@item.Enable" name=@("ckbEnable" + @item.SerialNumber) /></td>
+                                </tr>
+                            }
+                        }
+                        
+                    </tbody>
+                </table>
+            </form>
+        </div>
+        <footer>
+            <hr>
+
+        </footer>
+    </div>
+</div>
+
+<script type="text/javascript">
+    function save() {
+        formTable.submit();
+    }
+
+</script>
+

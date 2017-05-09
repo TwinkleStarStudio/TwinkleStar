@@ -1,0 +1,37 @@
+﻿
+@{
+    ViewBag.Title = "作者简介";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<script type="text/javascript" src="~/Scripts/ckeditor/ckeditor.js"></script>
+<div class="header">
+    <h5 class="page-title">作者简介</h5>
+</div>
+<div class="container-fluid">
+    <div class="row-fluid">
+        <div class="btn-toolbar">
+            <button class="btn btn-primary" id="btnSave"><i class="icon-plus"></i>保存</button>
+        </div>
+        <div class="well">
+            <textarea name="editor1" id="editor1" rows="10" cols="80" style="min-height:500px">@ViewBag.content</textarea>
+            <script type="text/javascript">
+                                CKEDITOR.replace('editor1');
+            </script> 
+        </div>
+    </div>
+</div>
+<script>
+    $("#btnSave").click(function () {
+        var data = CKEDITOR.instances.editor1.getData();
+        var index = layer.load(1, {
+            shade: [0.1, '#fff'] //0.1透明度的白色背景
+        });
+        $.post("@Url.Action("Update")", data, function (data) {
+            layer.close(index);
+            layer.msg(data.result.msg);
+
+        },"json")
+
+    })
+
+</script>

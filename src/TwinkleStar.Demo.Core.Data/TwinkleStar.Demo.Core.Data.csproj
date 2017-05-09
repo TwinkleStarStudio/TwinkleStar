@@ -1,0 +1,136 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{710981D1-223E-435D-8830-357E14C633A2}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>TwinkleStar.Demo.Core.Data</RootNamespace>
+    <AssemblyName>TwinkleStar.Demo.Core.Data</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.Composition" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Configurations\LoginLogConfiguration.cs" />
+    <Compile Include="Configurations\LoginLogConfiguration.generated.cs" />
+    <Compile Include="Configurations\MemberAddressConfiguration.cs" />
+    <Compile Include="Configurations\MemberConfiguration.generated.cs" />
+    <Compile Include="Configurations\MemberExtendConfiguration.cs" />
+    <Compile Include="Configurations\MemberExtendConfiguration.generated.cs" />
+    <Compile Include="Configurations\RoleConfiguration.cs" />
+    <Compile Include="Configurations\RoleConfiguration.generated.cs" />
+    <Compile Include="Initialize\DemoDatabaseInitializer.cs" />
+    <Compile Include="Migrations\DemoConfiguration.cs" />
+    <Compile Include="Repositories\ILoginLogRepository.generated.cs" />
+    <Compile Include="Repositories\IMemberExtendRepository.generated.cs" />
+    <Compile Include="Repositories\IMemberRepository.generated.cs" />
+    <Compile Include="Repositories\Impl\LoginLogRepository.generated.cs" />
+    <Compile Include="Repositories\Impl\MemberExtendRepository.generated.cs" />
+    <Compile Include="Repositories\Impl\MemberRepository.generated.cs" />
+    <Compile Include="Repositories\Impl\RoleRepository.generated.cs" />
+    <Compile Include="Repositories\IRoleRepository.generated.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="T4Model\EntityCodeScript.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>EntityCodeScript.tt</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\TwinkleStar.Common\TwinkleStar.Common.csproj">
+      <Project>{7c011bb6-593b-4fc1-b0c8-93d6561b2f1f}</Project>
+      <Name>TwinkleStar.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\TwinkleStar.Data\TwinkleStar.Data.csproj">
+      <Project>{4a388dca-8c66-4d17-9ed4-c2abb511f44f}</Project>
+      <Name>TwinkleStar.Data</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\TwinkleStar.Demo.Core.Models\TwinkleStar.Demo.Core.Models.csproj">
+      <Project>{968e6423-854c-4d1a-8ce0-7ff68188df3b}</Project>
+      <Name>TwinkleStar.Demo.Core.Models</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\TwinkleStar.Service\TwinkleStar.Service.csproj">
+      <Project>{2201322c-0fc7-4b10-b676-7bf0a1037be5}</Project>
+      <Name>TwinkleStar.Service</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="T4Model\EntityCodeScript.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>EntityCodeScript.cs</LastGenOutput>
+      <LastOutputs>
+..\Configurations\LoginLogConfiguration.generated.cs
+..\Configurations\MemberConfiguration.generated.cs
+..\Configurations\MemberExtendConfiguration.generated.cs
+..\Configurations\RoleConfiguration.generated.cs
+..\Repositories\ILoginLogRepository.generated.cs
+..\Repositories\IMemberExtendRepository.generated.cs
+..\Repositories\IMemberRepository.generated.cs
+..\Repositories\Impl\LoginLogRepository.generated.cs
+..\Repositories\Impl\MemberExtendRepository.generated.cs
+..\Repositories\Impl\MemberRepository.generated.cs
+..\Repositories\Impl\RoleRepository.generated.cs
+..\Repositories\IRoleRepository.generated.cs
+.\EntityCodeScript.cs
+</LastOutputs>
+    </Content>
+    <Content Include="T4Model\EntityConfigurationTemplate.tt" />
+    <Content Include="T4Model\EntityRepositoryTemplate.tt" />
+    <Content Include="T4Model\IEntityRepositoryTemplate.tt" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

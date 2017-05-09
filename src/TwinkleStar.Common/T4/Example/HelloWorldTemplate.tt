@@ -1,0 +1,32 @@
+﻿<#+
+public class HelloWorldTemplate : CSharpTemplate
+{
+    private string _className;
+
+    public HelloWorldTemplate(string className)
+    {
+        _className = className;
+    }
+
+	public override string TransformText()
+	{
+#>
+using System;
+
+namespace TwinkleStar.Common.T4
+{
+    public class <#=_className #>
+    {
+        private string _word;
+
+        public <#=_className #>(string word)
+        {
+            _word = word;
+        }
+    }
+}
+<#+
+        return this.GenerationEnvironment.ToString();
+	}
+}
+#>

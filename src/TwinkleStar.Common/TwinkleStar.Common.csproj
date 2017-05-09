@@ -1,0 +1,186 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{7C011BB6-593B-4FC1-B0C8-93D6561B2F1F}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>TwinkleStar.Common</RootNamespace>
+    <AssemblyName>TwinkleStar.Common</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject />
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="AutoMapper, Version=6.0.2.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005, processorArchitecture=MSIL">
+      <HintPath>..\packages\AutoMapper.6.0.2\lib\net45\AutoMapper.dll</HintPath>
+    </Reference>
+    <Reference Include="ICSharpCode.SharpZipLib, Version=0.86.0.518, Culture=neutral, PublicKeyToken=1b03e6acf1164f73, processorArchitecture=MSIL">
+      <HintPath>..\packages\SharpZipLib.0.86.0\lib\20\ICSharpCode.SharpZipLib.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="log4net, Version=1.2.15.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL">
+      <HintPath>..\packages\log4net.2.0.5\lib\net45-full\log4net.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Qiniu.6.1.8.6\lib\Net40\Newtonsoft.Json.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="NPOI, Version=2.2.1.0, Culture=neutral, PublicKeyToken=0df73ec7942b34e1, processorArchitecture=MSIL">
+      <HintPath>..\packages\NPOI.2.2.1\lib\net40\NPOI.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="NPOI.OOXML, Version=2.2.1.0, Culture=neutral, PublicKeyToken=0df73ec7942b34e1, processorArchitecture=MSIL">
+      <HintPath>..\packages\NPOI.2.2.1\lib\net40\NPOI.OOXML.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="NPOI.OpenXml4Net, Version=2.2.1.0, Culture=neutral, PublicKeyToken=0df73ec7942b34e1, processorArchitecture=MSIL">
+      <HintPath>..\packages\NPOI.2.2.1\lib\net40\NPOI.OpenXml4Net.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="NPOI.OpenXmlFormats, Version=2.2.1.0, Culture=neutral, PublicKeyToken=0df73ec7942b34e1, processorArchitecture=MSIL">
+      <HintPath>..\packages\NPOI.2.2.1\lib\net40\NPOI.OpenXmlFormats.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Qiniu.4.0, Version=6.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Qiniu.6.1.8.6\lib\Net40\Qiniu.4.0.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.configuration" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Base64\Base64Helper.cs" />
+    <Compile Include="Configs\ConfigBase.cs" />
+    <Compile Include="Configs\Configs.cs" />
+    <Compile Include="Configs\DBConnectionStrings.cs" />
+    <Compile Include="Configs\IGlobalConfig.cs" />
+    <Compile Include="Encrypt\Encrypt.cs" />
+    <Compile Include="Encrypt\MD5Helper.cs" />
+    <Compile Include="Excel\DataHelper.cs" />
+    <Compile Include="Excel\ExcelHelper.cs" />
+    <Compile Include="Excel\NpoiExtensions.cs" />
+    <Compile Include="Excel\NPOIHelper.cs" />
+    <Compile Include="Extensions\AutoMapperExt.cs" />
+    <Compile Include="Extensions\DateTimeExt.cs" />
+    <Compile Include="Extensions\ObjectExtensions.cs" />
+    <Compile Include="Extensions\TypeExtensions.cs" />
+    <Compile Include="HttpHelper.cs" />
+    <Compile Include="Json\JsonHelper.cs" />
+    <Compile Include="Logging\Logger.cs" />
+    <Compile Include="Logging\LogLevel.cs" />
+    <Compile Include="ObjectId\ObjectId.cs" />
+    <Compile Include="ObjectId\ObjectIdGenerator.cs" />
+    <Compile Include="Others\BusinessException.cs" />
+    <Compile Include="Others\ComponentException.cs" />
+    <Compile Include="Others\DataAccessException.cs" />
+    <Compile Include="Others\ExceptionMessage.cs" />
+    <Compile Include="Others\OperationResult.cs" />
+    <Compile Include="Others\OperationResultType.cs" />
+    <Compile Include="Others\StringComparisonIgnoreCase.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="PublicEnum.cs" />
+    <Compile Include="PublicHelper.cs" />
+    <Compile Include="QiNiu\QiNiuHelper.cs" />
+    <Compile Include="T4\Example\HelloWorld1.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>HelloWorld.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\Example\HelloWorldMulti1.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>HelloWorldMulti.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\Example\outPath\HelloWorld1.cs" />
+    <Compile Include="T4\Example\outPath\HelloWorld2.cs" />
+    <Compile Include="T4\Example\outPath\HelloWorld3.cs" />
+    <Compile Include="T4\T4ModelInfo.cs" />
+    <Compile Include="T4\T4Model\EntityCodeScript.cs">
+      <DependentUpon>EntityCodeScript.tt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="VerifyCode.cs" />
+    <Compile Include="XML\XMLHelper.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="T4\Example\HelloWorld.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>HelloWorld1.cs</LastGenOutput>
+    </Content>
+    <Content Include="T4\Example\HelloWorldMulti.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>HelloWorldMulti1.cs</LastGenOutput>
+      <LastOutputs>
+.\HelloWorldMulti1.cs
+.\outPath\HelloWorld1.cs
+.\outPath\HelloWorld2.cs
+.\outPath\HelloWorld3.cs
+</LastOutputs>
+    </Content>
+    <Content Include="T4\Example\HelloWorldTemplate.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>HelloWorldTemplate.cs</LastGenOutput>
+    </Content>
+    <Content Include="T4\readme.txt" />
+    <Content Include="T4\T4Model\EntityCodeScript.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>EntityCodeScript.cs</LastGenOutput>
+      <LastOutputs>.\EntityCodeScript.cs</LastOutputs>
+    </Content>
+    <Content Include="T4\T4Model\EntityConfigurationTemplate.tt" />
+    <Content Include="T4\T4Model\EntityRepositoryTemplate.tt" />
+    <Content Include="T4\T4Model\IEntityRepositoryTemplate.tt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

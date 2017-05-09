@@ -1,0 +1,153 @@
+﻿
+@{
+    ViewBag.Title = "文章管理";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="header">
+    <h5 class="page-title">文章管理</h5>
+</div>
+<div class="container-fluid">
+    <div class="row-fluid">
+
+        <div class="btn-toolbar">
+            <form id="search" method="post" action="@Url.Action("Index","Article")">
+                <div class="well">
+                    <table class="table searchtable">
+                        <tr>
+                            <th>作品类目</th>
+                            <td>
+                                <select name="ddCa" id="ddCa" class="input-xlarge">
+                                    <option value="">请选择</option>
+                                    @{ List<MrHai.Application.Models.CategoryListDto> calist = ViewBag.ca;
+                                        foreach (var item in calist)
+                                        {
+                                            if (item.Id.Equals(ViewBag.caID))
+                                            {
+                                                <option value="@item.Id" selected>@item.Name</option>
+                                            }
+                                            <option value="@item.Id">@item.Name</option>
+                                        }
+                                    }
+                                </select>
+                            </td>
+                            <th>作品名称</th>
+                            <td><input type="text" name="txtWorkName" class="input-xlarge" value="@ViewBag.workName" /></td>
+                        </tr>
+
+                        <tr>
+                            <td colspan="4" style="text-align:center">
+                                <button class="btn btn-primary" id="btnSearch" type="submit"><i class="icon-search"></i>查询</button>
+                                <button class="btn btn-primary" id="btnStart" type="reset"><i class="icon-trash"></i>重置</button>
+                                <button class="btn btn-primary" id="add" type="button"><i class="icon-plus"></i>新增</button>
+                                <input type="hidden" id="pageIndex" name="pageIndex" value="1" />
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </form>
+        </div>
+        <div class="well">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th style="width:10%">#</th>
+                        <th style="width:20%">作品分类</th>
+                        <th style="width:20%">作品名称</th>
+                        <th style="width:20%">文章题目</th>
+                        <th style="width:20%">创建时间</th>
+                        <th style="width:10%;text-align:center">操作</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @{
+                        List<MrHai.BMS.Models.Work.WorkViewModel> list = ViewBag.modelList;
+                        int i = 1;
+                        foreach (var item in list)
+                        {
+                            <tr>
+                                <td>@i</td>
+                                <td>@item.caName</td>
+                                <td>@item.name</td>
+                                <td>@item.title</td>
+                                <td>@item.createTime</td>
+                                <td style="text-align:center">
+                                    <a href="javascript:void(0)" onclick="Edit('@item.infoID')"><i class="icon-pencil"></i></a>
+                                    <a href="javascript:void(0)" onclick="Delete('@item.infoID')" role="button" data-toggle="modal"><i class="icon-remove"></i></a>
+                                </td>
+                            </tr>
+                            i++;
+                        }
+
+                    }
+
+
+                </tbody>
+            </table>
+        </div>
+        <div class="pagination" id="pageer">
+
+        </div>
+
+        <footer>
+            <hr>
+        </footer>
+
+    </div>
+</div>
+<script type="text/javascript">
+     @{
+         int pageIndex = ViewBag.pageIndex;
+         int pageCount = ViewBag.pageCount;
+     }
+    $(function GoPage() {
+        laypage({
+            cont: $("#pageer"),
+            pages: @pageCount,
+            skin:'#34495E',
+            curr: @pageIndex,
+            jump: function (e, first) { //触发分页后的回调
+                if (!first) { //一定要加此判断，否则初始时会无限刷新
+                    $("#pageIndex").val(e.curr)
+                    $("#btnSearch").click();
+                }
+            }
+        });
+    })
+    $("#add").click(function () {
+        layer.open({
+            type: 2,
+            title: '添加文章',
+            shadeClose: true,
+            shade: false,
+            maxmin: true, //开启最大化最小化按钮
+            area: ['1000px', '600px'],
+            content: '@Url.Action("New")'
+        });
+    })
+
+    function Edit(id) {
+        layer.open({
+            type: 2,
+            title: '编辑文章',
+            shadeClose: true,
+            shade: false,
+            maxmin: true, //开启最大化最小化按钮
+            area: ['1000px', '600px'],
+            content: '@Url.Action("New")' + "/" + id
+        });
+    }
+
+    function Delete(id) {
+        layer.confirm('确定删除?', { icon: 3, title: '提示' }, function (index) {
+            $.get("@Url.Action("Delete")" + "/" + id, function (data) {
+                console.log(data);
+                layer.msg(data.result.msg)
+                if (data.result.errcode==0) {
+                    window.location.reload();
+                }
+
+            },"json")
+        });
+    }
+</script>

@@ -1,0 +1,57 @@
+﻿<#@ template language="C#" debug="True" #>
+<#@ output extension="cs" #>
+<#@ Assembly Name="System.Core" #>
+<#@ Assembly Name="$(SolutionDir)\TwinkleStar.Common\bin\Debug\TwinkleStar.Common.dll" #>
+<#@ Assembly Name="$(SolutionDir)\TwinkleStar.Data\bin\Debug\TwinkleStar.Data.dll" #>
+<#@ import namespace="System.IO" #>
+<#@ Import Namespace="System.Linq" #>
+<#@ Import Namespace="System.Text" #>
+<#@ import namespace="System.Reflection" #>
+<#@ Import Namespace="System.Collections.Generic" #>
+<#@ Import Namespace="TwinkleStar.Data" #>
+<#@ Import Namespace="TwinkleStar.Common" #>
+<#@ Import Namespace="TwinkleStar.Common.Extensions" #>
+<#@ Import Namespace="TwinkleStar.Common.T4" #>
+<#@ include file="T4Toolbox.tt" #>
+<#@ include file="EntityConfigurationTemplate.tt" #>
+<#@ include file="IEntityRepositoryTemplate.tt" #>
+<#@ include file="EntityRepositoryTemplate.tt" #>
+
+<#
+	/*string currentPath = Path.GetDirectoryName(Host.TemplateFile);
+    string projectPath =currentPath.Substring(0, currentPath.IndexOf(@"\T4Model"));
+    string solutionPath = currentPath.Substring(0, currentPath.IndexOf(@"\TwinkleStar.Demo.Core.Data"));
+
+	string modelFile= Path.Combine(solutionPath, @"TwinkleStar.Demo.Core.Models\bin\Debug\TwinkleStar.Demo.Core.Models.dll");
+	byte[] fileData= File.ReadAllBytes(modelFile);
+	Assembly Assembly = Assembly.Load(fileData);
+	Type baseType= typeof(EntityBase);
+	IEnumerable<Type> modelTypes= Assembly.GetTypes().Where(m => m.IsSubclassOf(baseType) && !m.IsAbstract);
+	foreach(Type modelType in modelTypes)
+    {
+        T4ModelInfo model = new T4ModelInfo(modelType);
+        //实体映射类
+        EntityConfigurationTemplate config = new EntityConfigurationTemplate(model);
+        var path = model.UseModuleDir 
+            ? string.Format(@"{0}\Configurations\{1}", projectPath, model.ModuleName)
+            : string.Format(@"{0}\Configurations", projectPath);
+        config.Output.Encoding = Encoding.UTF8;
+        config.RenderToFile(Path.Combine(path, config.FileName));
+
+        //实体仓储操作接口
+        IEntityRepositoryTemplate irep= new IEntityRepositoryTemplate(model);
+        path = model.UseModuleDir
+            ? string.Format(@"{0}\Repositories\{1}", projectPath, model.ModuleName)
+            : string.Format(@"{0}\Repositories", projectPath);
+        irep.Output.Encoding = Encoding.UTF8;
+        irep.RenderToFile(Path.Combine(path, irep.FileName));
+        
+        //实体仓储操作实现
+        EntityRepositoryTemplate rep= new EntityRepositoryTemplate(model);
+        path = model.UseModuleDir
+            ? string.Format(@"{0}\Repositories\{1}\Impl", projectPath, model.ModuleName)
+            : string.Format(@"{0}\Repositories\Impl", projectPath);
+        rep.Output.Encoding = Encoding.UTF8;
+        rep.RenderToFile(Path.Combine(path, rep.FileName));
+    }*/
+ #>
