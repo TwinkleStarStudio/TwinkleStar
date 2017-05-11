@@ -252,4 +252,3 @@ paket-files/
 *.sln.iml
 **/wwwroot/node_modules
 **/wwwroot/bin
-**/*.min.*
